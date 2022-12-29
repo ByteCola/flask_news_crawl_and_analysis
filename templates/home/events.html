@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="row pt-4">
+        <div class="col-12 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2 class="fs-5 fw-bold mb-0">热门项目榜</h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row col-12" id="sports-chart" style="height:600px;">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script>
+    //var echarts = require('echarts');
+    data_source = []
+    <!-- {% for event in events %} -->
+            data_source.push(['{{ event.name }}',"{{ event.index_value }}"])
+    <!-- {% endfor %} -->
+
+
+    var chartDom = document.getElementById('sports-chart');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        dataset: [
+            {
+                dimensions: ['event_name', 'index_value'],
+                source: data_source
+            },
+            {
+                transform: {
+                    type: 'sort',
+                    config: {dimension: 'index_value', order: 'asc'}
+                }
+            }
+        ],
+        xAxis: {},
+        yAxis: {
+            type: 'category',
+            axisLabel: {interval: 0}
+        },
+        series: {
+            type: 'bar',
+            encode: {x: 'index_value', y: 'event_name'},
+            datasetIndex: 1
+        }
+    };
+
+    option && myChart.setOption(option);
+
+
+</script>
+
+{% endblock javascripts %}

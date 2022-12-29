@@ -1,0 +1,66 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+  <div class="row pt-4">
+        <div class="col-12 mb-4">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="row pt-4">
+                        <div class="col-12 mb-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h2 class="fs-5 fw-bold mb-0">爬虫新闻资源概况</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive p-4">
+                                    <table class="table align-items-center table-flush">
+                                        <thead class="thead-light">
+                                        <tr>
+
+                                            <th class="border-bottom" scope="col">网站</th>
+                                            <th class="border-bottom" scope="col">网址</th>
+                                            <th class="border-bottom" scope="col">新闻数量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for crawler in crawlers %}
+                                        <tr>
+                                            <td class="fw-bolder text-gray-500">
+                                                <a target="_blank" href="{{ crawler.site_url }}">{{ crawler.site_name }}</a>
+                                            </td>
+                                            <td class="fw-bolder text-gray-500">
+                                                <a  target="_blank" href="{{ crawler.site_url }}">{{ crawler.site_url }}</a>
+                                            </td>
+                                            <td>{{ crawler.news_num }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

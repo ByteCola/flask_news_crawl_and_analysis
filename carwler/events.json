@@ -1,0 +1,62 @@
+[
+  {
+    "code": "NCB",
+    "label": "北欧两项"
+  },
+  {
+    "code": "CUR",
+    "label": "冰壶"
+  },
+  {
+    "code": "IHO",
+    "label": "冰球"
+  },
+  {
+    "code": "SBD",
+    "label": "单板滑雪"
+  },
+  {
+    "code": "BTH",
+    "label": "冬季两项"
+  },
+  {
+    "code": "STK",
+    "label": "短道速滑"
+  },
+  {
+    "code": "SKN",
+    "label": "钢架雪车"
+  },
+  {
+    "code": "ALP",
+    "label": "高山滑雪"
+  },
+  {
+    "code": "FSK",
+    "label": "花样滑冰"
+  },
+  {
+    "code": "SSK",
+    "label": "速度滑冰"
+  },
+  {
+    "code": "SJP",
+    "label": "跳台滑雪"
+  },
+  {
+    "code": "BOB",
+    "label": "雪车"
+  },
+  {
+    "code": "LUG",
+    "label": "雪橇"
+  },
+  {
+    "code": "CCS",
+    "label": "越野滑雪"
+  },
+  {
+    "code": "FRS",
+    "label": "自由式滑雪"
+  }
+]

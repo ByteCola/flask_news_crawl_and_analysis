@@ -1,0 +1,211 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+    <div class="row pt-4">
+        {% for subject in subjects %}
+            {% if subject.rank < 4 %}
+                <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                    <div class="card border-0 shadow">
+                        <div class="card-body">
+                            <div class="row d-block d-xl-flex align-items-center">
+                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                    <div class="icon icon-shape bg-gradient-faded-danger shadow text-center border-radius-md">
+                                        <span class="text-white fw-bold fs-4">  {{ subject.rank }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-xl-7 px-xl-0">
+                                    <a href="/subject/{{ subject.rank }}">
+                                        <div class="d-none d-sm-block">
+
+                                            <h2 class="fs-6  mb-0"> {{ subject.title[0:28] }}</h2>
+                                            <h3 class="fw-extrabold fs-5 mb-2 text-danger"><i
+                                                    class="fas fa-fire"></i> {{ subject.index_value }} </h3>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6 mb-4" style="height:600px;" id="chart">
+                </div>
+                <div class="col-6 mb-4">
+                    <div class="card border-0 shadow">
+                        <div class="card-body">
+
+                            {% for subject in subjects %}
+                                {% if subject.rank > 3 %}
+                                    <div class="row mb-4">
+                                        <div style="width:60px">
+                                            <span class="fw-bold text-black fs-5 ">{{ subject.rank }}</span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="progress-wrapper">
+                                                <div class="progress-info">
+                                                    <div class="h6 mb-3">
+                                                        <a href="/subject/{{ subject.rank }}">
+                                                            {{ subject.title }}
+                                                            <span><i
+                                                                    class="fas fa-fire"></i>{{ subject.index_value }}</span>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <div class="progress mb-0">
+                                                    <div class="progress-bar  bg-gradient-faded-info" role="progressbar"
+                                                         aria-valuenow="75"
+                                                         aria-valuemin="0" aria-valuemax="100"
+                                                         style="width: {{ subject.index_value / 24 * 100 }}%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+    <script>
+        // var ecStat = require('echarts-stat');
+
+        var chartDom = document.getElementById('chart');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        // See https://github.com/ecomfe/echarts-stat
+        echarts.registerTransform(ecStat.transform.clustering);
+
+        const data = {{ pca_tsne}};
+        var CLUSTER_COUNT = {{ subjects_len }};
+        var DIENSIION_CLUSTER_INDEX = 2;
+        var COLOR_ALL = [
+            '#37A2DA',
+            '#e06343',
+            '#37a354',
+            '#b55dba',
+            '#b5bd48',
+            '#8378EA',
+            '#96BFFF',
+            '#039F0D',
+            '#903FD9',
+            '#00F938',
+            '#849DEA',
+            '#DE3930',
+            '#3904F3',
+            '#37A2DA',
+            '#e06343',
+            '#37a354',
+            '#b55dba',
+            '#b5bd48',
+            '#8378EA',
+            '#96BFFF',
+            '#039F0D',
+            '#903FD9',
+            '#00F938',
+            '#849DEA',
+            '#DE3930',
+            '#3904F3',
+            '#37A2DA',
+            '#e06343',
+            '#37a354',
+            '#b55dba',
+            '#b5bd48',
+            '#8378EA',
+            '#96BFFF',
+            '#039F0D',
+            '#903FD9',
+            '#00F938',
+            '#849DEA',
+            '#DE3930',
+            '#3904F3'
+        ];
+        var pieces = [];
+        for (var i = 0; i < CLUSTER_COUNT; i++) {
+            pieces.push({
+                value: i,
+                label: 'cluster ' + i,
+                color: COLOR_ALL[i]
+            });
+        }
+        option = {
+            dataset: [
+                {
+                    source: data
+                },
+                {
+                    transform: {
+                        type: 'ecStat:clustering',
+                        // print: true,
+                        config: {
+                            clusterCount: CLUSTER_COUNT,
+                            outputType: 'single',
+                            outputClusterIndexDimension: DIENSIION_CLUSTER_INDEX
+                        }
+                    }
+                }
+            ],
+            tooltip: {
+                position: 'top'
+            },
+            visualMap: {
+                type: 'piecewise',
+                top: 'middle',
+                min: 0,
+                max: CLUSTER_COUNT,
+                left: 10,
+                splitNumber: CLUSTER_COUNT,
+                dimension: DIENSIION_CLUSTER_INDEX,
+                pieces: pieces,
+                show: false
+            },
+            grid: {
+                left: 120
+            },
+
+            xAxis: {},
+            yAxis: {},
+            series: {
+                type: 'scatter',
+                encode: {tooltip: [0, 1]},
+                symbolSize: 15,
+                itemStyle: {
+                    borderColor: '#555',
+
+                },
+
+                datasetIndex: 1
+            }
+        };
+
+        option && myChart.setOption(option);
+
+    </script>
+
+{% endblock javascripts %}

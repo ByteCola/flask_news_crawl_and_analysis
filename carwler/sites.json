@@ -1,0 +1,27 @@
+[
+  {
+    "code": "beijing2022cn",
+    "label": "北京冬奥官网",
+    "url": "https://www.beijing2022.cn/"
+  },
+  {
+    "code": "163com",
+    "label": "网易新闻冬奥主页",
+    "url": "http://sports.163.com/special/bj2022_news/"
+  },
+  {
+    "code": "newscn",
+    "label": "新华网冬奥动态",
+     "url": "http://www.news.cn/beijing2022/erji.htm?page=dadt"
+  },
+  {
+    "code": "china",
+    "label": "中国网冬奥主页",
+     "url": "http://about.china.com.cn/node_8027858.htm"
+  },
+  {
+    "code": "peoplecomcn",
+    "label": "人民网冬奥主页",
+     "url": "http://sports.people.com.cn/GB/419056/index7.html"
+  }
+]

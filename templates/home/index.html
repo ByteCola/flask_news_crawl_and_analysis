@@ -1,0 +1,75 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+
+        <div class="row mt-4">
+            <div class="col-lg-12 mb-lg-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-lg-12 ">
+                                <div class="d-flex flex-column h-100">
+                                    <p class="mb-1 pt-2 text-bold">Readme</p>
+                                    <h5 class="font-weight-bolder">冬奥会新闻数据爬取与挖掘</h5>
+                                    <p class="mb-5">从北京冬奥会官网，新华网、中国网、人民网等新闻网站冬奥主题页面的新闻进行爬取、存储、分词、训练、挖掘。</p>
+
+                                    <h6 class="font-weight-bolder"># 爬虫</h6>
+                                    <p>
+                                        Requests是一个简单而优雅的HTTP库。</p>
+                                    <p>
+                                        Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它能够通过你喜欢的转换器实现惯用的文档导航,查找,修改文档的方式。
+                                    </p>
+                                    <p class="mb-4">
+                                        项目使用Reuqests库负责网络请求，Beautiful Soup进行解析处理。</p>
+                                    <h6 class="font-weight-bolder"># 存储</h6>
+
+                                    <p class="mb-4">
+                                        MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。</p>
+
+                                    <h6 class="font-weight-bolder"># 分词</h6>
+
+                                    <p class="mb-4">
+                                        jieba（结巴）分词，一款优秀的中分分词工具。</p>
+                                    <h6 class="font-weight-bolder"># 训练与挖掘</h6>
+
+                                    <p >
+                                        DBSCAN（Density—Based Spatial Clustering of Application with
+                                        Noise）算法是一种典型的基于密度的聚类方法。它将簇定义为密度相连的点的最大集合，能够把具有足够密度的区域划分为簇，并可以在有噪音的空间数据集中发现任意形状的簇。</p>
+                                    <p>
+                                        Scikit-learn(以前称为scikits.learn,也称为sklearn)是针对Python 编程语言的免费软件机器学习库。它具有各种分类,回归和聚类算法,包括支持向量机,随机森林,梯度提升,k均值和DBSCAN。
+                                    </p>
+                                    <p class="mb-4">
+                                        在Scikit-learn中，DBSCAN算法类为sklearn.cluster.DBSCAN。
+                                    </p>
+                                    <h6 class="font-weight-bolder"># 可视化</h6>
+
+                                    <p>
+                                        Flask是一个轻量级的基于Python的web框架。</p>
+                                    <p class="mb-4">
+                                        Apache ECharts,一个基于 JavaScript 的开源可视化图表库</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+{% endblock javascripts %}

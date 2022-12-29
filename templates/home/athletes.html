@@ -1,0 +1,124 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="row pt-4">
+    <div class="col-12 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h2 class="fs-5 fw-bold mb-0">运动员热度榜</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-xl-6" id="sports-chart" style="height:600px;"></div>
+                <div class="col-12 col-xl-6">
+                    <div class="row pt-4">
+                        <div class="col-12 mb-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-header">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h2 class="fs-5 fw-bold mb-0">更多排名</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive p-3">
+                                    <table class="table align-items-center table-flush">
+
+                                        <tr>
+                                            <th class="border-bottom" scope="col">名次</th>
+                                            <th class="border-bottom" scope="col">运动员</th>
+                                            <th class="border-bottom" scope="col">新闻指数</th>
+                                        </tr>
+                                        <tbody>
+                                        {% for athlete in athletes %}
+                                        <tr>
+                                            <th class="text-gray-900" scope="row">
+                                                {{ athlete.rank }}
+                                            </th>
+                                            <td class="fw-bolder text-gray-500">
+                                                {{ athlete.name }}
+                                            </td>
+                                            <td class="fw-bolder text-gray-500">
+                                                {{ athlete.index_value }}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script>
+    //var echarts = require('echarts');
+    data_athlete = []
+    data_index_value = []
+    <!-- {% for athlete in athletes %} -->
+            data_athlete.push('{{ athlete.name }}')
+            data_index_value.push('{{ athlete.index_value }}')
+    <!-- {% endfor %} -->
+    console.log(data_athlete)
+
+
+    var chartDom = document.getElementById('sports-chart');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        // title: [
+        //     {
+        //         text: 'Radial Polar Bar Label Position (middle)'
+        //     }
+        // ],
+        polar: {
+            radius: [30, '80%']
+        },
+        radiusAxis: {
+            max: 350
+        },
+        angleAxis: {
+            type: 'category',
+            data: data_athlete.slice(0,9),
+            startAngle: 75
+        },
+        tooltip: {},
+        series: {
+            type: 'bar',
+            data: data_index_value.slice(0,9),
+            coordinateSystem: 'polar',
+            label: {
+                show: true,
+                position: 'middle',
+                formatter: '{b}: {c}'
+            }
+        },
+        backgroundColor: '#fff',
+        animation: false
+    };
+
+    option && myChart.setOption(option);
+
+
+</script>
+
+{% endblock javascripts %}
