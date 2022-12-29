@@ -1,6 +1,10 @@
 
 # 冬奥会新闻数据爬取与挖掘系统
 
+![img.png](screenshot/img.png)
+
+![img_1.png](screenshot/img_1.png)
+
 ## 微信联系我 有偿修改 wx: bytecola
 
 <p class="mb-5">从北京冬奥会官网，新华网、中国网、人民网等新闻网站冬奥主题页面的新闻进行爬取、存储、分词、训练、挖掘。</p>
